@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Tekton.Service.Dto
 {
-    public class ProductDto
+    public abstract class ProductBase
     {
-        public Guid Id { get; set; }
+  
         public string Master { get; set; }
         public string Detail { get; set; }
     }
+    public class ProductDto: ProductBase
+    {
+        public Guid Id { get; set; }
+    }
+    public class ProductAddDto : ProductBase { }
 }

@@ -27,7 +27,7 @@ namespace Tekton.API.Controllers
 
         // POST api/<Product>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProductDto product)
+        public async Task<IActionResult> Post([FromBody] ProductAddDto product)
         {
             return Ok(await _productService.Insert(product));
         }
