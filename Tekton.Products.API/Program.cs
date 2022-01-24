@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Diagnostics;
+using System.Net;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +18,23 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(
+    options =>
+    {
+        options.Run(async context =>
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            context.Response.ContentType = "text/html";
+            var exceptionObject = context.Features.Get<IExceptionHandlerFeature>();
+            if (null != exceptionObject)
+            {
+                var errorMessage = $"{exceptionObject.Error.Message}";
+                await context.Response.WriteAsync(errorMessage).ConfigureAwait(false);
+            }
+        });
+    }
+);
 
 app.UseHttpsRedirection();
 
