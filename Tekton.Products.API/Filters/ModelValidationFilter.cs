@@ -5,7 +5,7 @@ using System.Web.Http.Controllers;
 
 namespace Tekton.API.Filters
 {
-    public sealed class ValidationFilter : ActionFilterAttribute
+    public sealed class ModelValidationFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext actionContext)
         {
