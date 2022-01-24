@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<TektonContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetSection("ConnectionString").GetSection("DefaultContext").Value);
+    options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings").GetSection("DefaultContext").Value);
 });
 
 builder.Services.AddControllers();
