@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 using Tekton.Data.Context;
 
-namespace Tekton.Data.Repositories
+namespace Tekton.Infrasttructure.Repositories
 {
     public class Repository<T> : IRepository<T>
         where T : class

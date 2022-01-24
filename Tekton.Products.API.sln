@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tekton.API", "Tekton.Products.API\Tekton.API.csproj", "{1FEFB16E-489C-4872-BA4B-DCBAB8BFBB6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.API", "Tekton.Products.API\Tekton.API.csproj", "{1FEFB16E-489C-4872-BA4B-DCBAB8BFBB6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tekton.Service", "Tekton.Services\Tekton.Service.csproj", "{C977CFFC-5222-45D3-939B-D84FC5CB6A69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.Service", "Tekton.Services\Tekton.Service.csproj", "{C977CFFC-5222-45D3-939B-D84FC5CB6A69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tekton.Data", "Tekton.Data\Tekton.Data.csproj", "{D70F8F83-A10D-43E1-B5A7-41A0DE7427C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.Data", "Tekton.Data\Tekton.Data.csproj", "{D70F8F83-A10D-43E1-B5A7-41A0DE7427C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tekton.Tests", "Tekton.Tests\Tekton.Tests.csproj", "{37A314A6-0440-449D-8DA9-0F98A141F6C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.Tests", "Tekton.Tests\Tekton.Tests.csproj", "{37A314A6-0440-449D-8DA9-0F98A141F6C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tektok.Infrastructure", "Tektok.Infrastructure\Tektok.Infrastructure.csproj", "{38360F3D-024C-4A9F-B4AB-DBA96121298C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{37A314A6-0440-449D-8DA9-0F98A141F6C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37A314A6-0440-449D-8DA9-0F98A141F6C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37A314A6-0440-449D-8DA9-0F98A141F6C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38360F3D-024C-4A9F-B4AB-DBA96121298C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38360F3D-024C-4A9F-B4AB-DBA96121298C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38360F3D-024C-4A9F-B4AB-DBA96121298C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38360F3D-024C-4A9F-B4AB-DBA96121298C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

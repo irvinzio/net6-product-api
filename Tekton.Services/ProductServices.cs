@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Tekton.Data.Entities;
-using Tekton.Data.Repositories;
 using Tekton.Service.Dto;
 using Tekton.Service.Interfaces;
 using Mapster;
+using Tekton.Infrasttructure.Repositories;
 
 namespace Tekton.Service
 {

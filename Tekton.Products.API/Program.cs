@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Net;
 using Tekton.API.Filters;
 using Tekton.Data.Context;
-using Tekton.Data.Repositories;
+using Tekton.Infrasttructure.Repositories;
 using Tekton.Service;
 using Tekton.Service.Interfaces;
 

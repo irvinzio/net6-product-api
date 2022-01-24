@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-
-namespace Tekton.Data.Repositories
+﻿namespace Tekton.Infrasttructure.Repositories
 {
     public interface IRepository<T> where T : class
     {

@@ -4,21 +4,22 @@ using Shouldly;
 using System;
 using System.Threading.Tasks;
 using Tekton.Data.Entities;
-using Tekton.Data.Repositories;
+using Tekton.Infrasttructure.Repositories;
 using Tekton.Service;
 using Tekton.Service.Dto;
+using Tekton.Service.Interfaces;
 using Xunit;
 
 namespace Tekton.Tests.Tekton.Service.Tests
 {
     public class ProductServiceTests
     {
-        private readonly ProductServices _productServices;
+        private readonly IProductService _productServices;
         private readonly IRepository<Product> _productRepo;
         public ProductServiceTests()
         {
             _productRepo = Substitute.For<IRepository<Product>>();
-            _productServices = new ProductServices(_productRepo);
+            _productServices = new ProductService(_productRepo);
         }
 
         [Fact]
