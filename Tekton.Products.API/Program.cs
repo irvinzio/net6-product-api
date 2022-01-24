@@ -1,9 +1,16 @@
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Tekton.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<TektonContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetSection("ConnectionString").GetSection("DefaultContext").Value);
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
