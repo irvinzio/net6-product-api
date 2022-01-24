@@ -36,6 +36,8 @@ namespace Tekton.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] ProductDto product)
         {
+            if (id != product.Id) { return BadRequest(); }
+
             var updatedProduct = await _productService.Update(id, product);
 
             if (updatedProduct == null) { return NotFound(); }
