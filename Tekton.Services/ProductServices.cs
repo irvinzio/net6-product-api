@@ -8,10 +8,10 @@ using Mapster;
 
 namespace Tekton.Service
 {
-    public class ProductServices : IProductService
+    public class ProductService : IProductService
     {
         private readonly IRepository<Product> _productRepo;
-        public ProductServices(IRepository<Product> productRepo) { _productRepo = productRepo; }
+        public ProductService(IRepository<Product> productRepo) { _productRepo = productRepo; }
         public async Task<ProductDto?> Get(Guid id)
         {
             return  (await _productRepo.Get(id)).Adapt<ProductDto>();
@@ -26,8 +26,12 @@ namespace Tekton.Service
         public async Task<ProductDto?> Update(Guid id, ProductDto productDto)
         {
             var product = await _productRepo.Get(id);
+
             if(product == null) { return null; }
-            product = productDto.Adapt<Product>();
+
+            product.Detail = productDto.Detail;
+            product.Master = productDto.Master;
+
             return (await _productRepo.Update(product)).Adapt<ProductDto>();
         }
     }
