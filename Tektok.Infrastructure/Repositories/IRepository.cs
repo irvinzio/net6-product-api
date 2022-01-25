@@ -1,4 +1,4 @@
-﻿namespace Tekton.Infrasttructure.Repositories
+﻿namespace Tekton.Infrastructure.Repositories
 {
     public interface IBaseRepository<T> where T : class
     {

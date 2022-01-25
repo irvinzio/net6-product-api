@@ -1,19 +1,19 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using Tektok.Infrastructure.Extensions;
 using Tektok.Infrastructure.Repositories.MockApi;
 using Tektok.Infrastructure.Repositories.MockApiRepo;
 using Tekton.API.Filters;
 using Tekton.API.Middlewares;
 using Tekton.Data.Context;
-using Tekton.Infrasttructure.Repositories;
+using Tekton.Infrastructure.Repositories;
 using Tekton.Service;
 using Tekton.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-    
 builder.Services.AddDbContext<TektonContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings").GetSection("DefaultContext").Value);
@@ -35,6 +35,7 @@ builder.Services.AddControllers(config =>
 
 var app = builder.Build();
 
+app.InitDatabase().GetAwaiter().GetResult();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
