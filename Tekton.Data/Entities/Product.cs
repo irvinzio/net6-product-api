@@ -10,7 +10,7 @@ namespace Tekton.Data.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         [Required]
-        public string Master { get; set; }
+        public int ProductMockId { get; set; }
         [Required]
         public string Detail { get; set; }
     }
