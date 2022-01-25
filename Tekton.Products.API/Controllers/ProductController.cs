@@ -16,7 +16,7 @@ namespace Tekton.API.Controllers
 
         // GET api/<Product>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<ActionResult<ProductDto>> Get(Guid id)
         {
             var product = await _productService.Get(id);
 
@@ -27,14 +27,14 @@ namespace Tekton.API.Controllers
 
         // POST api/<Product>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] ProductAddDto product)
+        public async Task<ActionResult<ProductDto>> Post([FromBody] ProductAddDto product)
         {
             return Ok(await _productService.Insert(product));
         }
 
         // PUT api/<Product>/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, [FromBody] ProductDto product)
+        public async Task<ActionResult<ProductDto>> Put(Guid id, [FromBody] ProductDto product)
         {
             if (id != product.Id) { return BadRequest(); }
 
