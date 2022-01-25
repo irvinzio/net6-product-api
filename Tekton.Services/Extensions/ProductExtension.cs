@@ -42,6 +42,18 @@ namespace Tekton.Service.Extensions
                 Product = product.Product
             };
         }
+        public static MockApiProductModel ToMockModel(this Product product, ProductDto productDto)
+        {
+            return new MockApiProductModel()
+            {
+                Name = productDto.Name,
+                Price = productDto.Price,
+                Description = productDto.Description,
+                Department = productDto.Department,
+                Product = productDto.Product,
+                Id = product.ProductMockId
+            };
+        }
         public static Product ToProduct(this ProductAddDto product, int mockProdcutId)
         {
             return new Product()

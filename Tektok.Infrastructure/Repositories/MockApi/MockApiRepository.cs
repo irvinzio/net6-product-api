@@ -1,4 +1,7 @@
-﻿using System.Net;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Net;
+using System.Net.Http.Formatting;
 using System.Net.Http.Json;
 using Tektok.Infrastructure.Repositories.MockApi;
 using Tekton.Infrasttructure.Repositories;
@@ -22,7 +25,14 @@ namespace Tektok.Infrastructure.Repositories.MockApiRepo
 
         public async Task<MockApiProductModel> Add(MockApiProductModel product)
         {
-            HttpResponseMessage response = await client.PostAsJsonAsync(_mockApiUrl, product);
+            var formatter = new JsonMediaTypeFormatter();
+            formatter.SerializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
+
+            HttpResponseMessage response = await client.PostAsync(_mockApiUrl, product, formatter);
             response.EnsureSuccessStatusCode();
 
             product = await response.Content.ReadAsAsync<MockApiProductModel>();

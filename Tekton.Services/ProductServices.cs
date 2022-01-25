@@ -46,7 +46,7 @@ namespace Tekton.Service
 
             var updatedProduct = await _productRepo.Update(product);
 
-            var mockRepo = await _mockApiRepository.Update(productDto.ToMockModel());
+            var mockRepo = await _mockApiRepository.Update(updatedProduct.ToMockModel(productDto));
 
             return updatedProduct.ToDto(mockRepo);
 
