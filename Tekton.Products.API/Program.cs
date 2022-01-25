@@ -11,7 +11,7 @@ using Tekton.Service.Interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+    
 builder.Services.AddDbContext<TektonContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetSection("ConnectionStrings").GetSection("DefaultContext").Value);

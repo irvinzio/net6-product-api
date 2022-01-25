@@ -17,8 +17,12 @@ namespace Tekton.API.Middlewares
             var method = context.Request.Method;
             context.Response.OnStarting(() => {
                 watch.Stop();
-                Console.WriteLine("time elapsed");
-                Console.WriteLine(watch.ElapsedMilliseconds.ToString());
+                var logFilePath = string.Format("{0}/{1}", Directory.GetCurrentDirectory(), "TimeResponseLog.txt");
+
+                using (var file = File.Exists(logFilePath) ? File.Open(logFilePath, FileMode.Append) : File.Open(logFilePath, FileMode.CreateNew))
+                using (var stream = new StreamWriter(file))
+                    stream.WriteLine($"{DateTime.Now} :: time elapsed for {method} {path} : {watch.ElapsedMilliseconds} miliseconds");
+
                 return Task.CompletedTask;
             });
             return this._next(context);
