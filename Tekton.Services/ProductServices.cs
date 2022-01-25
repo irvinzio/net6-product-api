@@ -5,22 +5,35 @@ using Tekton.Service.Dto;
 using Tekton.Service.Interfaces;
 using Mapster;
 using Tekton.Infrasttructure.Repositories;
+using Tektok.Infrastructure.Repositories.MockApi;
+using Tekton.Service.Extensions;
 
 namespace Tekton.Service
 {
     public class ProductService : IProductService
     {
         private readonly IRepository<Product> _productRepo;
-        public ProductService(IRepository<Product> productRepo) { _productRepo = productRepo; }
+        private readonly IMockApiRepository _mockApiRepository;
+        public ProductService(IRepository<Product> productRepo, IMockApiRepository mockApiRepository) 
+        {
+            _productRepo = productRepo; 
+            _mockApiRepository = mockApiRepository;
+        }
         public async Task<ProductDto?> Get(Guid id)
         {
-            return  (await _productRepo.Get(id)).Adapt<ProductDto>();
+            var product = await _productRepo.Get(id);
+            if (product == null) return null;
+            var mockProduct = await _mockApiRepository.Get(product.ProductMockId);
+            return product.ToDto(mockProduct);
         }
 
         public async Task<ProductDto> Insert(ProductAddDto productDto)
         {
-            var product = productDto.Adapt<Product>();
-            return (await _productRepo.Add(product)).Adapt<ProductDto>();
+            var mockProduct = await _mockApiRepository.Add(productDto.ToMockModel());
+            
+            var product = await _productRepo.Add(productDto.ToProduct(mockProduct.Id));
+
+            return product.ToDto(mockProduct);
         }
 
         public async Task<ProductDto?> Update(Guid id, ProductDto productDto)
@@ -30,9 +43,13 @@ namespace Tekton.Service
             if(product == null) { return null; }
 
             product.Detail = productDto.Detail;
-            product.Master = productDto.Master;
 
-            return (await _productRepo.Update(product)).Adapt<ProductDto>();
+            var updatedProduct = await _productRepo.Update(product);
+
+            var mockRepo = await _mockApiRepository.Update(productDto.ToMockModel());
+
+            return updatedProduct.ToDto(mockRepo);
+
         }
     }
 }
