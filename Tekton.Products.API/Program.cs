@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using Tekton.API.Filters;
+using Tekton.API.Middlewares;
 using Tekton.Data.Context;
 using Tekton.Infrasttructure.Repositories;
 using Tekton.Service;
@@ -37,6 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ResponseTimeMiddleware>();
 
 app.UseExceptionHandler(
     options =>
