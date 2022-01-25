@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tekton.Data.Context;
 
@@ -11,9 +12,10 @@ using Tekton.Data.Context;
 namespace Tekton.Data.Migrations
 {
     [DbContext(typeof(TektonContext))]
-    partial class TektonContextModelSnapshot : ModelSnapshot
+    [Migration("20220125071524_addProductId")]
+    partial class addProductId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
