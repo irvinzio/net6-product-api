@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.Data", "Tekton.Data\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tekton.Tests", "Tekton.Tests\Tekton.Tests.csproj", "{37A314A6-0440-449D-8DA9-0F98A141F6C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tektok.Infrastructure", "Tektok.Infrastructure\Tektok.Infrastructure.csproj", "{38360F3D-024C-4A9F-B4AB-DBA96121298C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tektok.Infrastructure", "Tektok.Infrastructure\Tektok.Infrastructure.csproj", "{38360F3D-024C-4A9F-B4AB-DBA96121298C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
