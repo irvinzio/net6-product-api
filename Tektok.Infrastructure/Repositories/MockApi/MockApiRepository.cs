@@ -4,7 +4,7 @@ using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Json;
 using Tektok.Infrastructure.Repositories.MockApi;
-using Tekton.Infrasttructure.Repositories;
+using Tekton.Infrastructure.Repositories;
 
 namespace Tektok.Infrastructure.Repositories.MockApiRepo
 {
@@ -12,6 +12,16 @@ namespace Tektok.Infrastructure.Repositories.MockApiRepo
     {
         static HttpClient client = new HttpClient();
         private readonly string _mockApiUrl = "https://61ef30a5d593d20017dbb369.mockapi.io/tekton/api/v1/product";
+        public async Task<List<MockApiProductModel>> Get()
+        {
+            List<MockApiProductModel> products = null;
+            HttpResponseMessage response = await client.GetAsync(_mockApiUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                products = await response.Content.ReadAsAsync<List<MockApiProductModel>>();
+            }
+            return products;
+        }
         public async Task<MockApiProductModel> Get(int id)
         {
             MockApiProductModel product = null;
