@@ -3,15 +3,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Tekton.API.Filters
 {
-    public sealed class ModelValidationFilter : ActionFilterAttribute
+    public class ModelValidation : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext actionContext)
+        public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var modelState = actionContext.ModelState;
-
-            if (!modelState.IsValid)
+            if (!context.ModelState.IsValid)
             {
-                actionContext.Result = new BadRequestObjectResult("Invalid Model");
+                context.Result = new BadRequestObjectResult(context.ModelState);
             }
         }
     }

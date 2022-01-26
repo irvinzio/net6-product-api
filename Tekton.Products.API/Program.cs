@@ -30,7 +30,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers(config =>
 {
-    config.Filters.Add(new ModelValidationFilter());
+    config.Filters.Add(new ModelValidation());
 });
 
 builder.Services.AddLazyCache();

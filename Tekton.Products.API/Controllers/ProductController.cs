@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tekton.API.Filters;
 using Tekton.Service.Dto;
 using Tekton.Service.Interfaces;
 
@@ -6,6 +7,7 @@ namespace Tekton.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ModelValidation]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
