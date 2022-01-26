@@ -36,7 +36,7 @@ this will dun de project create database and populate default test users
 
 to access swagger documentation
 ```
-https://localhost:5001/docs/index.html
+https://localhost:7282/swagger/index.html
 ```
 
 ## License
