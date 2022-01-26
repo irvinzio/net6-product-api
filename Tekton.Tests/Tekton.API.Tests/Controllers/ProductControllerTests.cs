@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tekton.API.Controllers;
 using Tekton.Service.Dto;
 using Tekton.Service.Interfaces;
+using Tekton.Tests.Extensions;
 using Xunit;
 
 namespace Tekton.Tests.Tekton.API.Tests.Controllers
@@ -25,18 +26,15 @@ namespace Tekton.Tests.Tekton.API.Tests.Controllers
         public async Task Get_should_return_product_by_id()
         {
             var id = Guid.NewGuid();
-            var product = new ProductDto()
-            {
-                Id = id,
-                Master = "Master",
-                Detail = "detail"
-            };
+            var product = ProductDtoExtension.GetProductDto(id);
 
             _productService.Get(Arg.Any<Guid>()).Returns(product);
 
-            var result = await _productController.Get(id) as  OkObjectResult;
+            var response = await _productController.Get(id);
+            var result = response.Result as OkObjectResult;
 
             result.ShouldNotBeNull();
+            result.ShouldBeOfType<OkObjectResult>();
             result.Value.ShouldBeSameAs(product);
         }
         [Fact]
@@ -46,27 +44,24 @@ namespace Tekton.Tests.Tekton.API.Tests.Controllers
 
             _productService.Get(Arg.Any<Guid>()).Returns((ProductDto)null);
 
-            var result = await _productController.Get(id);
+            var response = await _productController.Get(id);
 
-            result.ShouldNotBeNull();
-            result.ShouldBeOfType<NotFoundResult>();
+            response.ShouldNotBeNull();
+            response.Result.ShouldBeOfType<NotFoundResult>();
         }
 
         [Fact]
         public async Task Post_should_return_product_by_id()
         {
             var id = Guid.NewGuid();
-            var productAdd = new ProductAddDto()
-            {
-                Master = "Master",
-                Detail = "detail"
-            };
+            var productAdd = ProductDtoExtension.GetProductAddDto();
             var productDto = new ProductAddDto().Adapt<ProductDto>();
             productDto.Id = id;
 
             _productService.Insert(Arg.Any<ProductAddDto>()).Returns(productDto);
 
-            var result = await _productController.Post(productAdd) as OkObjectResult;
+            var response = await _productController.Post(productAdd);
+            var result = response.Result as OkObjectResult;
 
             result.ShouldNotBeNull();
             result.Value.ShouldBeSameAs(productDto);
@@ -75,16 +70,12 @@ namespace Tekton.Tests.Tekton.API.Tests.Controllers
         public async Task Update_should_return_product_by_id()
         {
             var id = Guid.NewGuid();
-            var product = new ProductDto()
-            {
-                Id = id,
-                Master = "Master",
-                Detail = "detail"
-            };
+            var product = ProductDtoExtension.GetProductDto(id);
 
-            _productService.Update(Arg.Any<Guid>(),Arg.Any<ProductDto>()).Returns(product);
+            _productService.Update(Arg.Any<Guid>(), Arg.Any<ProductDto>()).Returns(product);
 
-            var result = await _productController.Put(id,product) as OkObjectResult;
+            var response = await _productController.Put(id, product);
+            var result = response.Result as OkObjectResult;
 
             result.ShouldNotBeNull();
             result.Value.ShouldBeSameAs(product);
@@ -93,14 +84,27 @@ namespace Tekton.Tests.Tekton.API.Tests.Controllers
         public async Task Update_should_return_notFound()
         {
             var id = Guid.NewGuid();
-            var product = new ProductDto();
+            var product = new ProductDto() { Id = id };
 
-            _productService.Get(Arg.Any<Guid>()).Returns((ProductDto)null);
+            _productService.Update(Arg.Any<Guid>(), Arg.Any<ProductDto>()).Returns((ProductDto)null);
 
             var result = await _productController.Put(id, product);
 
             result.ShouldNotBeNull();
-            result.ShouldBeOfType<NotFoundResult>();
+            result.Result.ShouldBeOfType<NotFoundResult>();
+        }
+        [Fact]
+        public async Task Update_should_return_BadRequest()
+        {
+            var id = Guid.NewGuid();
+            var product = new ProductDto();
+
+            _productService.Update(Arg.Any<Guid>(), Arg.Any<ProductDto>()).Returns((ProductDto)null);
+
+            var result = await _productController.Put(id, product);
+
+            result.ShouldNotBeNull();
+            result.Result.ShouldBeOfType<BadRequestResult>();
         }
     }
 }
