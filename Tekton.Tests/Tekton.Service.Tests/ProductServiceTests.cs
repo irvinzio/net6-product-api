@@ -6,7 +6,6 @@ using System;
 using System.Threading.Tasks;
 using Tektok.Infrastructure.Repositories.MockApi;
 using Tekton.Data.Entities;
-using Tekton.Infrastructure.Repositories;
 using Tekton.Service;
 using Tekton.Service.Dto;
 using Tekton.Service.Interfaces;
@@ -16,6 +15,8 @@ using LazyCache.Testing.NSubstitute;
 using Tekton.Service.Extensions;
 using AutoFixture;
 using Microsoft.Extensions.Caching.Memory;
+using Tektok.Infrastructure.MockApi;
+using Tekton.Infrastructure.Interfaces;
 
 namespace Tekton.Tests.Tekton.Service.Tests
 {

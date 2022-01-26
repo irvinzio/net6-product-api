@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tekton.Data.Context;
+using Tekton.Infrastructure.Interfaces;
 
 namespace Tekton.Infrastructure.Repositories
 {

@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using Tektok.Infrastructure.Extensions;
-using Tektok.Infrastructure.Repositories.MockApi;
+using Tektok.Infrastructure.MockApi;
 using Tektok.Infrastructure.Repositories.MockApiRepo;
 using Tekton.API.Filters;
 using Tekton.API.Middlewares;
 using Tekton.Data.Context;
+using Tekton.Infrastructure.Interfaces;
 using Tekton.Infrastructure.Repositories;
 using Tekton.Service;
 using Tekton.Service.Interfaces;
@@ -20,7 +21,7 @@ builder.Services.AddDbContext<TektonContext>(options =>
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IMockApiRepository, MockApiRepository>();
+builder.Services.AddScoped<IMockApiRepository, MockApi>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllers();

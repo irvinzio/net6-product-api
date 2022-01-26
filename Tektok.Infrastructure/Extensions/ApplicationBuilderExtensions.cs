@@ -24,7 +24,7 @@ namespace Tektok.Infrastructure.Extensions
         }
         private static async Task SeedProdcuts(TektonContext context)
         {
-            var mockApiData = await new MockApiRepository().Get();
+            var mockApiData = await new Repositories.MockApiRepo.MockApi().Get();
 
             if (!mockApiData.Any()) return;
 

@@ -1,6 +1,7 @@
-﻿using Tekton.Infrastructure.Repositories;
+﻿using Tektok.Infrastructure.Repositories.MockApi;
+using Tekton.Infrastructure.Interfaces;
 
-namespace Tektok.Infrastructure.Repositories.MockApi
+namespace Tektok.Infrastructure.MockApi
 {
 
     public interface IMockApiRepository : IBaseRepository<MockApiProductModel> 

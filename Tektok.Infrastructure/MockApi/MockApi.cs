@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Net;
 using System.Net.Http.Formatting;
 using System.Net.Http.Json;
+using Tektok.Infrastructure.MockApi;
 using Tektok.Infrastructure.Repositories.MockApi;
-using Tekton.Infrastructure.Repositories;
+using Tekton.Infrastructure.Interfaces;
 
 namespace Tektok.Infrastructure.Repositories.MockApiRepo
 {
-    public class MockApiRepository: IBaseRepository<MockApiProductModel>, IMockApiRepository
+    public class MockApi: IBaseRepository<MockApiProductModel>, IMockApiRepository
     {
         static HttpClient client = new HttpClient();
         private readonly string _mockApiUrl = "https://61ef30a5d593d20017dbb369.mockapi.io/tekton/api/v1/product";
