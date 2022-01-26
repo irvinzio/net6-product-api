@@ -6,6 +6,7 @@ using Tekton.Service.Interfaces;
 using Tektok.Infrastructure.Repositories.MockApi;
 using Tekton.Service.Extensions;
 using Tekton.Infrastructure.Repositories;
+using LazyCache;
 
 namespace Tekton.Service
 {
@@ -13,17 +14,22 @@ namespace Tekton.Service
     {
         private readonly IRepository<Product> _productRepo;
         private readonly IMockApiRepository _mockApiRepository;
-        public ProductService(IRepository<Product> productRepo, IMockApiRepository mockApiRepository) 
+        private readonly IAppCache _cache;
+
+        public ProductService(IRepository<Product> productRepo, IMockApiRepository mockApiRepository, IAppCache cache) 
         {
-            _productRepo = productRepo; 
+            _productRepo = productRepo;
             _mockApiRepository = mockApiRepository;
+            _cache = cache;
         }
         public async Task<ProductDto?> Get(Guid id)
         {
             var product = await _productRepo.Get(id);
             if (product == null) return null;
-            var mockProduct = await _mockApiRepository.Get(product.ProductMockId);
-            return product.ToDto(mockProduct);
+
+            var productsWithCaching = await _cache.GetOrAddAsync(product.Id.ToString(), () => _mockApiRepository.Get(product.ProductMockId));
+
+            return product.ToDto(productsWithCaching);
         }
 
         public async Task<ProductDto> Insert(ProductAddDto productDto)

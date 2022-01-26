@@ -33,6 +33,9 @@ builder.Services.AddControllers(config =>
     config.Filters.Add(new ModelValidationFilter());
 });
 
+builder.Services.AddLazyCache();
+
+
 var app = builder.Build();
 
 app.InitDatabase().GetAwaiter().GetResult();
